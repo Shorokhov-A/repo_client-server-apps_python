@@ -32,6 +32,14 @@ def get_port():
     return listen_port
 
 
+def get_address():
+    if '-a' in sys.argv:
+        listen_address = sys.argv[sys.argv.index('-a') + 1]
+    else:
+        listen_address = ''
+    return listen_address
+
+
 def main():
     """
     Загрузка параметров командной строки.
@@ -50,10 +58,7 @@ def main():
 
     # Затем обрабатываем адрес
     try:
-        if '-a' in sys.argv:
-            listen_address = int(sys.argv[sys.argv.index('-a') + 1])
-        else:
-            listen_address = ''
+        listen_address = get_address()
     except IndexError:
         print('После параметра -\'a\' необходимо указать адрес, который будет слушать сервер.')
         sys.exit(1)
