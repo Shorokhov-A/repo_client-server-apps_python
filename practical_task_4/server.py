@@ -22,6 +22,16 @@ def process_client_message(message):
     }
 
 
+def get_port():
+    if '-p' in sys.argv:
+        listen_port = int(sys.argv[sys.argv.index('-p') + 1])
+    else:
+        listen_port = DEFAULT_PORT
+    if listen_port < 1024 or listen_port > 65535:
+        raise ValueError
+    return listen_port
+
+
 def main():
     """
     Загрузка параметров командной строки.
@@ -30,12 +40,7 @@ def main():
     """
     # Сначала обрабатываем порт: server.py -p 8888 -a 127.0.0.1
     try:
-        if '-p' in sys.argv:
-            listen_port = int(sys.argv[sys.argv.index('-p') + 1])
-        else:
-            listen_port = DEFAULT_PORT
-        if listen_port < 1024 or listen_port > 65535:
-            raise ValueError
+        listen_port = get_port()
     except IndexError:
         print('После параметра -\'p\' необходимо указать номер порта.')
         sys.exit(1)

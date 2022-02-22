@@ -1,8 +1,9 @@
 import sys
 import os
 from unittest import TestCase
+from unittest.mock import patch
 sys.path.append(os.path.join(os.getcwd(), '..'))
-from server import process_client_message
+from server import process_client_message, get_port
 from common.variables import RESPONSE, ERROR, ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE_DEFAULT_IP_ADDRESS
 
 
@@ -39,3 +40,15 @@ class TestServer(TestCase):
             process_client_message({ACTION: PRESENCE, TIME: 1.1, USER: {ACCOUNT_NAME: 'USER'}}),
             self.error_dict
         )
+
+    @patch.object(sys, 'argv', ['server.py', '-p', 8888])
+    def test_get_port_ok(self):
+        self.assertEqual(get_port(), 8888)
+
+    @patch.object(sys, 'argv', ['server.py', '-p'])
+    def test_get_port_no_port(self):
+        self.assertRaises(IndexError, get_port)
+
+    @patch.object(sys, 'argv', ['server.py', '-p', 959])
+    def test_get_port_wrong_port(self):
+        self.assertRaises(ValueError, get_port)
