@@ -22,7 +22,13 @@ def process_client_message(message):
     }
 
 
-def get_port():
+def main():
+    """
+    Загрузка параметров командной строки.
+    Если нет параметров, то задаем значения по умолчанию.
+    :return:
+    """
+    # Сначала обрабатываем порт: server.py -p 8888 -a 127.0.0.1
     try:
         if '-p' in sys.argv:
             listen_port = int(sys.argv[sys.argv.index('-p') + 1])
@@ -36,10 +42,8 @@ def get_port():
     except ValueError:
         print('В качестве порта может быть указано только число в диапазоне от 1024 до 65535.')
         sys.exit(1)
-    return listen_port
 
-
-def get_address():
+    # Затем обрабатываем адрес
     try:
         if '-a' in sys.argv:
             listen_address = int(sys.argv[sys.argv.index('-a') + 1])
@@ -48,20 +52,6 @@ def get_address():
     except IndexError:
         print('После параметра -\'a\' необходимо указать адрес, который будет слушать сервер.')
         sys.exit(1)
-    return listen_address
-
-
-def main():
-    """
-    Загрузка параметров командной строки.
-    Если нет параметров, то задаем значения по умолчанию.
-    :return:
-    """
-    # Сначала обрабатываем порт: server.py -p 8888 -a 127.0.0.1
-    listen_port = get_port()
-
-    # Затем обрабатываем адрес
-    listen_address = get_address()
 
     transport = socket(AF_INET, SOCK_STREAM)
     transport.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)

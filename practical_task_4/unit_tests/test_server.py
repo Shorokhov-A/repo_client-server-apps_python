@@ -1,7 +1,6 @@
 import sys
 import os
 from unittest import TestCase
-from unittest.mock import patch
 sys.path.append(os.path.join(os.getcwd(), '..'))
 from server import process_client_message
 from common.variables import RESPONSE, ERROR, ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE_DEFAULT_IP_ADDRESS
