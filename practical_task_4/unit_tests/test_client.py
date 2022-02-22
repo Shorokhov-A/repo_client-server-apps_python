@@ -1,10 +1,9 @@
 import sys
 import os
 from unittest import TestCase
+sys.path.append(os.path.join(os.getcwd(), '..'))
 from client import create_presence, process_ans
 from common.variables import TIME, ACTION, PRESENCE, USER, ACCOUNT_NAME, RESPONSE, ERROR
-
-sys.path.append(os.path.join(os.getcwd(), '..'))
 
 
 class TestClient(TestCase):
