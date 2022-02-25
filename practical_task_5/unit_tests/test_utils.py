@@ -5,7 +5,7 @@ from unittest import TestCase
 sys.path.append(os.path.join(os.getcwd(), '..'))
 from common.utils import get_message, send_message
 from common.variables import ENCODING, ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, \
-    RESPONSE_DEFAULT_IP_ADDRESS, ERROR
+    ERROR
 
 
 class TestSocket:
@@ -34,7 +34,7 @@ class TestUtils(TestCase):
     }
     test_dict_recv_ok = {RESPONSE: 200}
     test_dict_recv_error = {
-        RESPONSE_DEFAULT_IP_ADDRESS: 400,
+        RESPONSE: 400,
         ERROR: 'Bad request',
     }
 
