@@ -3,7 +3,7 @@ import json
 import logging
 import logs.server_log_config
 from socket import socket, AF_INET, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
-from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, RESPONSE_DEFAULT_IP_ADDRESS, \
+from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, \
     ERROR, DEFAULT_PORT, MAX_CONNECTIONS
 from common.utils import get_message, send_message
 from errors import IncorrectDataReceivedError
@@ -24,7 +24,7 @@ def process_client_message(message):
             and USER in message and message[USER][ACCOUNT_NAME] == 'Guest':
         return {RESPONSE: 200}
     return {
-        RESPONSE_DEFAULT_IP_ADDRESS: 400,
+        RESPONSE: 400,
         ERROR: 'Bad request',
     }
 
