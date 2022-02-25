@@ -1,6 +1,14 @@
 """Ошибки"""
 
 
+class IncorrectDataReceivedError(Exception):
+    """
+    Ошибка - от сокета получены некорректные данные.
+    """
+    def __str__(self):
+        return 'Принято некорректное сообщение от удаленного компьютера.'
+
+
 class ReqFieldMissingError(Exception):
     """
     Ошибка - отсутствует обязательное поле в принятом словаре.
