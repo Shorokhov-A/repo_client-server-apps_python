@@ -7,11 +7,13 @@ from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONS
     ERROR, DEFAULT_PORT, MAX_CONNECTIONS
 from common.utils import get_message, send_message
 from errors import IncorrectDataReceivedError
+from decorators import log
 
 # Инициализация логирования сервера:
 SERVER_LOGGER = logging.getLogger('server')
 
 
+@log
 def process_client_message(message):
     """
     Обработчик сообщений от клиентов.
@@ -29,6 +31,7 @@ def process_client_message(message):
     }
 
 
+@log
 def get_port():
     if '-p' in sys.argv:
         listen_port = int(sys.argv[sys.argv.index('-p') + 1])
@@ -43,6 +46,7 @@ def get_port():
     return listen_port
 
 
+@log
 def get_address():
     if '-a' in sys.argv:
         listen_address = sys.argv[sys.argv.index('-a') + 1]
