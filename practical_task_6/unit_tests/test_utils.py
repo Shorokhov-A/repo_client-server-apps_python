@@ -6,6 +6,7 @@ sys.path.append(os.path.join(os.getcwd(), '..'))
 from common.utils import get_message, send_message
 from common.variables import ENCODING, ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, \
     ERROR
+from errors import NoDictInputError
 
 
 class TestSocket:
@@ -45,7 +46,7 @@ class TestUtils(TestCase):
 
     def test_wrong_dict(self):
         test_socket = TestSocket(self.test_dict_send)
-        self.assertRaises(TypeError, send_message, test_socket, 'wrong_dictionary')
+        self.assertRaises(NoDictInputError, send_message, test_socket, 'wrong_dictionary')
 
     def test_get_message_ok(self):
         test_sock_ok = TestSocket(self.test_dict_recv_ok)
