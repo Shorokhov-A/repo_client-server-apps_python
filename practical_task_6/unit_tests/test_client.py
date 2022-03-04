@@ -4,6 +4,7 @@ from unittest import TestCase
 sys.path.append(os.path.join(os.getcwd(), '..'))
 from client import create_presence, process_ans
 from common.variables import TIME, ACTION, PRESENCE, USER, ACCOUNT_NAME, RESPONSE, ERROR
+from errors import ReqFieldMissingError
 
 
 class TestClient(TestCase):
@@ -19,4 +20,4 @@ class TestClient(TestCase):
         self.assertEqual(process_ans({RESPONSE: 400, ERROR: 'Bad request'}), '400 : Bad request')
 
     def test_no_response(self):
-        self.assertRaises(ValueError, process_ans, {ERROR: 'Bad request'})
+        self.assertRaises(ReqFieldMissingError, process_ans, {ERROR: 'Bad request'})
