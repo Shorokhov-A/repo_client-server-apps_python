@@ -18,3 +18,11 @@ class ReqFieldMissingError(Exception):
 
     def __str__(self):
         return f'В принятом словаре отсутствует обязательное поле {self.missing_field}.'
+
+
+class NoDictInputError(Exception):
+    """
+    Ошибка - аргумент функции не является словарём.
+    """
+    def __str__(self):
+        return 'Аргумент функции должен быть словарём.'
