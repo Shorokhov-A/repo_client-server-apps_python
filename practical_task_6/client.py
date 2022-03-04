@@ -9,11 +9,13 @@ from errors import ReqFieldMissingError
 from common.variables import DEFAULT_IP_ADDRESS, DEFAULT_PORT, ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, \
     ERROR
 from common.utils import send_message, get_message
+from decorators import log
 
 # Инициализация клиентского логгера:
 CLIENT_LOGGER = logging.getLogger('client')
 
 
+@log
 def create_presence(account_name='Guest'):
     """
     Функция генерирует запрос о присутствии клиента.
@@ -31,6 +33,7 @@ def create_presence(account_name='Guest'):
     return out
 
 
+@log
 def process_ans(message):
     """
     Функция разбирает ответ сервера.
@@ -45,6 +48,7 @@ def process_ans(message):
     raise ReqFieldMissingError(RESPONSE)
 
 
+@log
 def create_arg_parser():
     """
     Функция-парсер аргументов командной строки.

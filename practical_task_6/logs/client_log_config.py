@@ -6,7 +6,7 @@ sys.path.append(os.path.join(os.getcwd(), '..'))
 from common.variables import ENCODING, LOGGING_LEVEL
 
 # Создаем объект форматирования:
-CLIENT_FORMATTER = logging.Formatter('%(asctime)s %(levelname)-8s %(filename)s %(message)s')
+CLIENT_FORMATTER = logging.Formatter('%(asctime)s %(levelname)-8s %(filename)-13s %(message)s')
 
 # Подготовка имени файла для логирования:
 PATH = os.path.dirname(os.path.abspath(__file__))
