@@ -26,3 +26,12 @@ class NoDictInputError(Exception):
     """
     def __str__(self):
         return 'Аргумент функции должен быть словарём.'
+
+
+class ServerError(Exception):
+    """Исключение - ошибка сервера."""
+    def __init__(self, text):
+        self.text = text
+
+    def __str__(self):
+        return self.text
