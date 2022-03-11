@@ -21,6 +21,8 @@ def process_client_message(message, messages_list, client):
     Обработчик сообщений от клиентов.
     Функция принимает словарь-сообщение от клиента, проверяет корректность, возвращает словарь-ответ для клиента.
     :param message:
+    :param messages_list:
+    :param client:
     :return:
     """
     SERVER_LOGGER.debug(f'Разбор сообщения от клиента: {message}.')
@@ -32,7 +34,7 @@ def process_client_message(message, messages_list, client):
     # Если это сообщение, то добавляем его в очередь сообщений. Ответ не требуется.
     elif ACTION in message and message[ACTION] == MESSAGE and TIME in message \
             and MESSAGE_TEXT in message:
-        messages_list.append(message[ACCOUNT_NAME], message[MESSAGE_TEXT])
+        messages_list.append((message[ACCOUNT_NAME], message[MESSAGE_TEXT]))
         return
     else:
         send_message(client, {
@@ -109,7 +111,7 @@ def main():
         except OSError:
             pass
 
-        # Принимаем сообщения и ели они есть, то кладем в словарь. В случае ошибки исключаем клиента.
+        # Принимаем сообщения и еcли они есть, то кладем в словарь. В случае ошибки исключаем клиента.
         if recv_data_list:
             for client_with_message in recv_data_list:
                 try:
